@@ -1,6 +1,7 @@
 "use client";
 
-import { generateQuiz, saveQuizResult } from "@/actions/interview";
+import { useState, useEffect } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,13 +10,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import useFetch from "@/hooks/use-fetch";
-import { useEffect, useState } from "react";
-import { BarLoader } from "react-spinners";
-import { toast } from "sonner";
+import { Label } from "@/components/ui/label";
+import { generateQuiz, saveQuizResult } from "@/actions/interview";
 import QuizResult from "./quiz-result";
+import useFetch from "@/hooks/use-fetch";
+import { BarLoader } from "react-spinners";
 
 export default function Quiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);

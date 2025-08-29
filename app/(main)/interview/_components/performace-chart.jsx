@@ -1,23 +1,23 @@
 "use client";
 
 import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { format } from "date-fns";
 import { useEffect, useState } from "react";
-import {
-  CartesianGrid,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { format } from "date-fns";
 
 export default function PerformanceChart({ assessments }) {
   const [chartData, setChartData] = useState([]);

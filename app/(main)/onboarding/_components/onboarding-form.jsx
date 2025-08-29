@@ -1,8 +1,11 @@
 "use client";
 
-import { updateUser } from "@/actions/user";
-import { onboardingSchema } from "@/app/lib/schema";
-import { Button } from "@/components/ui/button";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 import {
   Card,
   CardContent,
@@ -10,8 +13,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -21,14 +26,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
 import useFetch from "@/hooks/use-fetch";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+import { onboardingSchema } from "@/app/lib/schema";
+import { updateUser } from "@/actions/user";
 
 const OnboardingForm = ({ industries }) => {
   const router = useRouter();

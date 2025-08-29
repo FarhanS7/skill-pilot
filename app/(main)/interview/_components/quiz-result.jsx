@@ -1,177 +1,72 @@
 "use client";
 
-import { generateQuiz, saveQuizResult } from "@/actions/interview";
+import { Trophy, CheckCircle2, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import useFetch from "@/hooks/use-fetch";
-import { useEffect, useState } from "react";
-import { BarLoader } from "react-spinners";
-import { toast } from "sonner";
-import QuizResult from "./quiz-result";
+import { CardContent, CardFooter } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
 
-export default function Quiz() {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState([]);
-  const [showExplanation, setShowExplanation] = useState(false);
-
-  const {
-    loading: generatingQuiz,
-    fn: generateQuizFn,
-    data: quizData,
-  } = useFetch(generateQuiz);
-
-  const {
-    loading: savingResult,
-    fn: saveQuizResultFn,
-    data: resultData,
-    setData: setResultData,
-  } = useFetch(saveQuizResult);
-
-  useEffect(() => {
-    if (quizData) {
-      setAnswers(new Array(quizData.length).fill(null));
-    }
-  }, [quizData]);
-
-  const handleAnswer = (answer) => {
-    const newAnswers = [...answers];
-    newAnswers[currentQuestion] = answer;
-    setAnswers(newAnswers);
-  };
-
-  const handleNext = () => {
-    if (currentQuestion < quizData.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-      setShowExplanation(false);
-    } else {
-      finishQuiz();
-    }
-  };
-
-  const calculateScore = () => {
-    let correct = 0;
-    answers.forEach((answer, index) => {
-      if (answer === quizData[index].correctAnswer) {
-        correct++;
-      }
-    });
-    return (correct / quizData.length) * 100;
-  };
-
-  const finishQuiz = async () => {
-    const score = calculateScore();
-    try {
-      await saveQuizResultFn(quizData, answers, score);
-      toast.success("Quiz completed!");
-    } catch (error) {
-      toast.error(error.message || "Failed to save quiz results");
-    }
-  };
-
-  const startNewQuiz = () => {
-    setCurrentQuestion(0);
-    setAnswers([]);
-    setShowExplanation(false);
-    generateQuizFn();
-    setResultData(null);
-  };
-
-  if (generatingQuiz) {
-    return <BarLoader className="mt-4" width={"100%"} color="gray" />;
-  }
-
-  // Show results if quiz is completed
-  if (resultData) {
-    return (
-      <div className="mx-2">
-        <QuizResult result={resultData} onStartNew={startNewQuiz} />
-      </div>
-    );
-  }
-
-  if (!quizData) {
-    return (
-      <Card className="mx-2">
-        <CardHeader>
-          <CardTitle>Ready to test your knowledge?</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground">
-            This quiz contains 10 questions specific to your industry and
-            skills. Take your time and choose the best answer for each question.
-          </p>
-        </CardContent>
-        <CardFooter>
-          <Button onClick={generateQuizFn} className="w-full">
-            Start Quiz
-          </Button>
-        </CardFooter>
-      </Card>
-    );
-  }
-
-  const question = quizData[currentQuestion];
+export default function QuizResult({
+  result,
+  hideStartNew = false,
+  onStartNew,
+}) {
+  if (!result) return null;
 
   return (
-    <Card className="mx-2">
-      <CardHeader>
-        <CardTitle>
-          Question {currentQuestion + 1} of {quizData.length}
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <p className="text-lg font-medium">{question.question}</p>
-        <RadioGroup
-          onValueChange={handleAnswer}
-          value={answers[currentQuestion]}
-          className="space-y-2"
-        >
-          {question.options.map((option, index) => (
-            <div key={index} className="flex items-center space-x-2">
-              <RadioGroupItem value={option} id={`option-${index}`} />
-              <Label htmlFor={`option-${index}`}>{option}</Label>
-            </div>
-          ))}
-        </RadioGroup>
+    <div className="mx-auto">
+      <h1 className="flex items-center gap-2 text-3xl gradient-title">
+        <Trophy className="h-6 w-6 text-yellow-500" />
+        Quiz Results
+      </h1>
 
-        {showExplanation && (
-          <div className="mt-4 p-4 bg-muted rounded-lg">
-            <p className="font-medium">Explanation:</p>
-            <p className="text-muted-foreground">{question.explanation}</p>
+      <CardContent className="space-y-6">
+        {/* Score Overview */}
+        <div className="text-center space-y-2">
+          <h3 className="text-2xl font-bold">{result.quizScore.toFixed(1)}%</h3>
+          <Progress value={result.quizScore} className="w-full" />
+        </div>
+
+        {/* Improvement Tip */}
+        {result.improvementTip && (
+          <div className="bg-muted p-4 rounded-lg">
+            <p className="font-medium">Improvement Tip:</p>
+            <p className="text-muted-foreground">{result.improvementTip}</p>
           </div>
         )}
+
+        {/* Questions Review */}
+        <div className="space-y-4">
+          <h3 className="font-medium">Question Review</h3>
+          {result.questions.map((q, index) => (
+            <div key={index} className="border rounded-lg p-4 space-y-2">
+              <div className="flex items-start justify-between gap-2">
+                <p className="font-medium">{q.question}</p>
+                {q.isCorrect ? (
+                  <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0" />
+                ) : (
+                  <XCircle className="h-5 w-5 text-red-500 flex-shrink-0" />
+                )}
+              </div>
+              <div className="text-sm text-muted-foreground">
+                <p>Your answer: {q.userAnswer}</p>
+                {!q.isCorrect && <p>Correct answer: {q.answer}</p>}
+              </div>
+              <div className="text-sm bg-muted p-2 rounded">
+                <p className="font-medium">Explanation:</p>
+                <p>{q.explanation}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </CardContent>
-      <CardFooter className="flex justify-between">
-        {!showExplanation && (
-          <Button
-            onClick={() => setShowExplanation(true)}
-            variant="outline"
-            disabled={!answers[currentQuestion]}
-          >
-            Show Explanation
+
+      {!hideStartNew && (
+        <CardFooter>
+          <Button onClick={onStartNew} className="w-full">
+            Start New Quiz
           </Button>
-        )}
-        <Button
-          onClick={handleNext}
-          disabled={!answers[currentQuestion] || savingResult}
-          className="ml-auto"
-        >
-          {savingResult && (
-            <BarLoader className="mt-4" width={"100%"} color="gray" />
-          )}
-          {currentQuestion < quizData.length - 1
-            ? "Next Question"
-            : "Finish Quiz"}
-        </Button>
-      </CardFooter>
-    </Card>
+        </CardFooter>
+      )}
+    </div>
   );
 }

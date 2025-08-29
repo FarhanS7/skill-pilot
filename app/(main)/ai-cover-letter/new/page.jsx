@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import CoverLetterGenerator from "../_components/cover-letter-generator";
 
 export default function NewCoverLetterPage() {

@@ -1,6 +1,23 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
+import React from "react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+import {
+  BriefcaseIcon,
+  LineChart,
+  TrendingUp,
+  TrendingDown,
+  Brain,
+} from "lucide-react";
+import { format, formatDistanceToNow } from "date-fns";
 import {
   Card,
   CardContent,
@@ -8,24 +25,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { format, formatDistanceToNow } from "date-fns";
-import {
-  Brain,
-  BriefcaseIcon,
-  LineChart,
-  TrendingDown,
-  TrendingUp,
-} from "lucide-react";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
 
 const DashboardView = ({ insights }) => {
   // Transform salary data for the chart

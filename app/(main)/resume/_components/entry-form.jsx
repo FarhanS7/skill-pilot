@@ -1,9 +1,13 @@
 // app/resume/_components/entry-form.jsx
 "use client";
 
-import { improveWithAI } from "@/actions/resume";
-import { entrySchema } from "@/app/lib/schema";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { format, parse } from "date-fns";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Card,
   CardContent,
@@ -11,15 +15,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import useFetch from "@/hooks/use-fetch";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { format, parse } from "date-fns";
-import { Loader2, PlusCircle, Sparkles, X } from "lucide-react";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { entrySchema } from "@/app/lib/schema";
+import { Sparkles, PlusCircle, X, Pencil, Save, Loader2 } from "lucide-react";
+import { improveWithAI } from "@/actions/resume";
 import { toast } from "sonner";
+import useFetch from "@/hooks/use-fetch";
 
 const formatDisplayDate = (dateString) => {
   if (!dateString) return "";

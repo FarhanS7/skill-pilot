@@ -10,15 +10,18 @@ import {
   ChevronDown,
   FileText,
   GraduationCap,
+  LayoutDashboard,
   PenBox,
   StarsIcon,
 } from "lucide-react";
 import Link from "next/link";
-import Logo from "./Logo";
+
+import Logo from "./logo";
 import { Button } from "./ui/button";
 
 export default async function Header() {
   await checkUser();
+
   return (
     <header className="fixed top-0 w-full border-b bg-background/80 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
@@ -29,18 +32,18 @@ export default async function Header() {
         {/* Action Buttons */}
         <div className="flex items-center space-x-2 md:space-x-4">
           <SignedIn>
-            {/* <Link href="/dashboard">
+            <Link href="/dashboard">
               <Button
                 variant="outline"
-                className="hidden md:inline-flex items-center gap-2 mt-10"
+                className="hidden md:inline-flex items-center gap-2"
               >
-                <LayoutDashboard className="h-4 w-4 mt-10" />
+                <LayoutDashboard className="h-4 w-4" />
                 Industry Insights
               </Button>
               <Button variant="ghost" className="md:hidden w-10 h-10 p-0">
                 <LayoutDashboard className="h-4 w-4" />
               </Button>
-            </Link> */}
+            </Link>
 
             {/* Growth Tools Dropdown */}
             <DropdownMenu>

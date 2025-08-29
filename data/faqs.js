@@ -1,33 +1,32 @@
 export const faqs = [
   {
-    question: "What makes Skill-Pilot unique as a career development tool?",
+    question: "What sets Skill-Pilot apart in career development?",
     answer:
-      "Skill-Pilot combines AI-powered career tools with industry-specific insights to help you advance your career. Our platform offers three main features: an intelligent resume builder, a cover letter generator, and an adaptive interview preparation system. Each tool is tailored to your industry and skills, providing personalized guidance for your professional journey.",
+      "Skill-Pilot combines cutting-edge AI-driven career tools with tailored industry insights, providing you with essential resources to progress in your career. Key features include a smart resume builder, a dynamic cover letter generator, and an interview prep system that adapts to your specific role and industry.",
   },
   {
-    question: "How does Skill-Pilot create tailored content?",
+    question: "How does Skill-Pilot customize its content for me?",
     answer:
-      "Skill-Pilot learns about your industry, experience, and skills during onboarding. It then uses this information to generate customized resumes, cover letters, and interview questions. The content is specifically aligned with your professional background and industry standards, making it highly relevant and effective.",
+      "Through an initial onboarding process, Skill-Pilot gathers information about your professional background and field of expertise. Using this data, it generates personalized resumes, cover letters, and interview questions that align with your career goals and industry norms.",
   },
   {
-    question:
-      "How accurate and up-to-date are Skill-Pilot's industry insights?",
+    question: "How reliable is Skill-Pilot's industry data?",
     answer:
-      "We update our industry insights weekly using advanced AI analysis of current market trends. This includes salary data, in-demand skills, and industry growth patterns. Our system constantly evolves to ensure you have the most relevant information for your career decisions.",
+      "Skill-Pilot keeps its industry insights fresh and relevant by updating them weekly. Our AI system evaluates market trends, salary benchmarks, and emerging skills to ensure you're always equipped with the latest and most accurate information to guide your career decisions.",
   },
   {
-    question: "Is my data secure with Skill-Pilot?",
+    question: "Is my data protected with Skill-Pilot?",
     answer:
-      "Absolutely. We prioritize the security of your professional information. All data is encrypted and securely stored using industry-standard practices. We use Clerk for authentication and never share your personal information with third parties.",
+      "Your privacy is our priority. Skill-Pilot employs robust encryption protocols and secure data storage systems to safeguard your personal information. We partner with Clerk for authentication, and we never share your data with third parties without your consent.",
   },
   {
-    question: "How can I track my interview preparation progress?",
+    question: "Can I monitor my interview preparation progress?",
     answer:
-      "Skill-Pilot tracks your performance across multiple practice interviews, providing detailed analytics and improvement suggestions. You can view your progress over time, identify areas for improvement, and receive AI-generated tips to enhance your interview skills based on your responses.",
+      "Yes! Skill-Pilot tracks your performance across mock interviews, providing detailed analytics and suggestions for improvement. You can monitor your development over time and receive personalized AI-generated feedback to enhance your interview skills.",
   },
   {
-    question: "Can I edit the AI-generated content?",
+    question: "Can I modify the AI-generated documents?",
     answer:
-      "Yes! While Skill-Pilot generates high-quality initial content, you have full control to edit and customize all generated resumes, cover letters, and other content. Our markdown editor makes it easy to refine the content to perfectly match your needs.",
+      "Absolutely! While Skill-Pilot offers well-crafted templates for resumes, cover letters, and other documents, you have full freedom to edit and adjust the content to suit your needs. Our intuitive markdown editor makes customization a breeze.",
   },
 ];
