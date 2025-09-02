@@ -1,17 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { format } from "date-fns";
-import { Edit2, Eye, Trash2 } from "lucide-react";
-import { toast } from "sonner";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { deleteCoverLetter } from "@/actions/cover-letter";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -23,7 +12,18 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { deleteCoverLetter } from "@/actions/cover-letter";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { format } from "date-fns";
+import { Eye, Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function CoverLetterList({ coverLetters }) {
   const router = useRouter();
