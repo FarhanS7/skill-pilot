@@ -1,3 +1,4 @@
+import HeroSection from "@/components/hero";
 import {
   Accordion,
   AccordionContent,
@@ -13,7 +14,6 @@ import { testimonial } from "@/data/testimonial";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import HeroSection from "../components/hero";
 
 export default function LandingPage() {
   return (
