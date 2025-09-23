@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-import Logo from "./logo";
+import Logo from "./Logo";
 import { Button } from "./ui/button";
 
 export default async function Header() {
